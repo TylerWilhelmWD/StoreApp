@@ -1,0 +1,24 @@
+
+<form class="well col-xs-10 col-sm-10 col-md-4 col-lg-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-1 col-xs-offset-1" method="POST" action="/addItem">
+  <h1>Create New Item</h1>
+  <br />
+  
+    <label for="itemName">Item Name</label>
+    <input type="text" name="itemName" class="form-control" id="itemName">
+  
+    <label for="itemPrice">Item Price:</label>
+    <input type="number" class="form-control" name ="price" id="itemPrice" placeholder="$">
+  
+    <label for="itemInventory">Item Amount:</label>
+    <input type="number" name="amount" class="form-control" id="itemInventory">
+
+    <label class="form-check-label" for="itemDesc">Item Description</label>
+    <textarea class="form-control" name="description" rows="5" id="itemDesc"></textarea>
+  
+    <label for="itemImage">Item Image URL</label>
+    <input type="url" class="form-control" id="itemURL" name="imageURL" placeholder="http://www.imgur.com">
+  
+  <br>
+  <input type="submit" class="btn btn-primary btn-lg"value="Create Item"/>
+  
+</form>
