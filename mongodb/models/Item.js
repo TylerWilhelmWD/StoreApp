@@ -14,9 +14,16 @@ var Item = mongoose.model('Item', {
         minlength: 1,
         trim: true
     },
+    adminPrice: {
+        type: Number,
+        
+        minlength: 1,
+        trim: true
+    },
     description: {
         type: String,
-        trim: true
+        trim: true,
+        maxlength: 140 
     },
     amount: {
         type: Number,
@@ -24,19 +31,13 @@ var Item = mongoose.model('Item', {
         minlength: 1,
         trim: true
     },
-    imageURL: {
+    itemImage: {
         type: String,
         minlength: 1,
         trim: true
-    }
+     }
+
 });
-
-// var newItem = new Item({
-
-// });
-// newItem.save().then({
-
-// });
 
 //Use ES6
 module.exports = {Item};

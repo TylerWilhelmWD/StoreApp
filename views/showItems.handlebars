@@ -1,0 +1,33 @@
+{{#grouped_each 3 items}}
+<div class="row">
+{{#each this}}
+
+    
+<div class="col-lg-4 col-md-4 col-sm-6">
+    <div class="card card-stats d-flex align-items-stretch">
+        <div class="card-header card-header-info card-header-icon">
+            <div class="card-icon">
+                <image src="https://cdn.pixabay.com/photo/2018/03/12/04/00/mammal-3218712_1280.jpg"
+                        style="width: 100%;"/>
+                        
+                {{!-- <i class="fa fa-twitter"></i> --}}
+            </div>
+       
+        </div>
+        
+        <div class="card-footer">
+             <h1 style="color: black;">{{itemName}}</h1><br>
+            <p class="card-category">{{description}}</p>
+            <div class="stats">
+                {{#ifCond amount 1}}
+                    <i class="material-icons">check_box</i> In Stock
+                {{/ifCond}}
+                
+            </div>
+        </div>
+    </div>
+  </div>
+{{/each}}
+</div>
+{{/grouped_each}}
+

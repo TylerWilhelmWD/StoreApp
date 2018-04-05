@@ -1,0 +1,61 @@
+<table>
+    
+</table>
+<div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-primary">
+                                    <h4 class="card-title ">All Items</h4>
+                                    <p class="card-category">Admin price is shown only when logged in.</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Admin Price</th>
+    </tr>
+    </thead>
+    <tbody>
+        {{#if user}}
+            {{#each items}}
+                <tr>
+                    <td>{{itemName}}</td>
+                    <td>{{price}}</td>
+                    <td>{{description}}</td>
+                    <td>{{amount}}</td>
+                    
+                    <td>{{adminPrice}}</td>
+                    
+                
+                    
+                </tr>
+            {{/each}}
+            {{else}}
+                {{#each items}}
+                <tr>
+                    <td>{{itemName}}</td>
+                    <td>{{price}}</td>
+                    <td>{{description}}</td>
+                    <td>{{amount}}</td>
+                    
+                    
+                    <td>N/A</td>
+                    
+                </tr>
+                {{/each}}
+                          
+            
+        {{/if}}
+
+    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
