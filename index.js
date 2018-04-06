@@ -57,7 +57,7 @@ app.use("/uploads", express.static("uploads"));
 //var {mongoose} = require('./mongoose');
 var {Item} = require('./mongodb/models/Item');
 
-mongoose.connect("mongodb://tylerwilhelm:Griffin2017Ladd@ds237409.mlab.com:37409/storeapp").then(() => console.log("db connected")).catch(error => console.log(error, "Failed to connect to DB"));
+mongoose.connect("mongodb://tylerwilhelm:Griffin2017Ladd@ds237409.mlab.com:37409/storeapp").then(() => console.log("db connected and running on " + app.get("port"))).catch(error => console.log(error, "Failed to connect to DB"));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
