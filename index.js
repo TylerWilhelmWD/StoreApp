@@ -53,7 +53,7 @@ app.use("/uploads", express.static("uploads"));
 //var {mongoose} = require('./mongoose');
 var {Item} = require('./mongodb/models/Item');
 
-mongoose.connect("mongodb://localhost:27017/StoreApp").then(() => console.log("db connected")).catch(error => console.log(error));
+mongoose.connect("mongodb://tylerwilhelm:Griffin2017Ladd@ds237409.mlab.com:37409/storeapp").then(() => console.log("db connected")).catch(error => console.log(error));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');

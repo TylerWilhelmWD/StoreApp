@@ -2,7 +2,7 @@ const {MongoClient, ObjectID} = require('mongodb');
 
 
 //change db location here
-MongoClient.connect("mongodb://localhost:27017/StoreApp", (error, client) => {
+MongoClient.connect("mongodb://tylerwilhelm:Griffin2017Ladd@ds237409.mlab.com:37409/storeapp", (error, client) => {
     if(error){
        return console.log("Mongo Connection Failed");
     }
