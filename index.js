@@ -12,6 +12,10 @@ const uploads = require("./helpers/multer_config");
 const mongoose = require("mongoose");
 var {ObjectID} = require('mongodb');
 
+
+// var mongoOptions = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+//                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };       
+
 handlebarsT.registerHelper('grouped_each', function(every, context, options) {
     var out = "", subcontext = [], i;
     if (context && context.length > 0) {
@@ -53,7 +57,7 @@ app.use("/uploads", express.static("uploads"));
 //var {mongoose} = require('./mongoose');
 var {Item} = require('./mongodb/models/Item');
 
-mongoose.connect("mongodb://tylerwilhelm:Griffin2017Ladd@ds237409.mlab.com:37409/storeapp").then(() => console.log("db connected")).catch(error => console.log(error));
+mongoose.connect("mongodb://tylerwilhelm:Griffin2017Ladd@ds237409.mlab.com:37409/storeapp").then(() => console.log("db connected")).catch(error => console.log(error, "Failed to connect to DB"));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
