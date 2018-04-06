@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require('body-parser');
-
+const methodOverride = require('method-override')
 
 const app = express();
 const passport = require("passport");
@@ -61,7 +61,7 @@ app.use(express.static('public'));
 app.set("port", process.env.PORT || 8080);
 
 app.use(bodyParser.json());
-
+app.use(methodOverride("_method"))
 //allows form submission to submit JSON
 app.use(bodyParser.urlencoded({extended: false}));
 //Google passport middleware
@@ -99,46 +99,44 @@ app.route({
 
 
 
-app.get('/showItems', (request, response) => {
+app.get('/home', (request, response) => {
     Item.find().then((items) => {
-        response.render('showItems', {items: items})
+        response.render('home', {items: items})
         //response.send(items);
     }, (error) => {
 
     });
 });
 app.get('/', (request, response) => {
-    response.render('home', {layout:'storeApp.handlebars'});
-});
-
-app.get('/home', (request, response) => {
-    response.render('home', {layout:'storeApp.handlebars'});
+    response.redirect('/home');
 });
 
 
-// app.get('/login', (request, response) => {
-//     response.render('login', {layout:'signUI.handlebars'});
-// });
 
-// app.get('/signup', (request, response) => {
-//     response.render('signup', {layout:'signUI.handlebars'});
-// });
+
+app.get('/login', (request, response) => {
+    response.render('login');
+});
+
+app.get('/signup', (request, response) => {
+    response.render('signup');
+});
 
 app.get('/addItem', (request, response) => {
     response.render('addItem');
 });
-app.post('/addItem', (request, response) => {
-   
+app.post('/addItem', uploads.single("imageURL"), (request, response) => {
+    let imgURL = request.file.path;
     var item = new Item({
         itemName: request.body.itemName,
         price: request.body.price,
         description: request.body.description,
         amount: request.body.amount,
-        itemImage: request.body.itemImage,
+        itemImage: imgURL,
         adminPrice: request.body.adminPrice
     });
     item.save().then((document) => {
-        response.render('showItems');
+        response.redirect('/listItems');
     }, (error) => {
         response.status(400).send(error);
         //response.send(JSON.stringify(response.body));
@@ -165,12 +163,47 @@ app.get('/items/:itemid', (request, response) =>{
             return response.status(404).send();
         }
 
-        response.send({item});
+        response.render('item', {item: item});
+
     }).catch((error) => {
         response.status(400).send();
     });
 
+
+});
+app.use( function( req, res, next ) {
+    // this middleware will call for each requested
+    // and we checked for the requested query properties
+    // if _method was existed
+    // then we know, clients need to call DELETE request instead
+    if ( req.query._method == 'DELETE' ) {
+        // change the original METHOD
+        // into DELETE method
+        req.method = 'DELETE';
+        // and set requested url to /user/12
+        req.url = req.path;
+    }       
+    next(); 
+});
+app.delete('/items/:itemid', (request, response) =>{
+    var itemid = request.params.itemid;
     
+    if (!ObjectID.isValid(itemid)) {
+        return response.status(404).send();
+    }
+    Item.findByIdAndRemove(itemid).then((item) => {
+        if (!item) {
+            return response.status(404).send();
+        }
+
+        //response.send(item);
+        response.redirect('/listItems');
+
+    }).catch((error) => {
+        response.status(400).send();
+    });
+
+   
 });
 
 require("./routes/authRoutes")(app);

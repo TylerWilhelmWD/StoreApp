@@ -25,12 +25,15 @@ passport.use(
      proxy: true
    },
    (accessToken, refreshtoken, profile, done) => {
+     console.log(profile);
      User.findOne({ googleID: profile.id }).then(user => {
        if (user) {
          done(null, user);
        } else {
          new User({
-           googleID: profile.id
+           googleID: profile.id,
+           name: profile.displayName
+
          })
            .save()
            .then(user => {

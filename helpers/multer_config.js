@@ -13,7 +13,7 @@ const uploads = (function() {
     });
     const fileFilter = (req, file, cb) => {
       // reject file
-      if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+      if (!file.originalname.match(/\.(jpg|jpeg|png|gif|JPG)$/)) {
         cb(new Error("Only Images Allowed!"), false);
       } else {
         cb(null, true);
